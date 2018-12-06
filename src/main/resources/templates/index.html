@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Niezawodność oprogramowania</title>
+</head>
+<body>
+    <div th:if="${output} != null">
+        <div th:if="${output.jelinskiMorandaOutput} != null">
+            <h1>Model Jelińskiego-Morandy</h1>
+            <p th:text="'N: ' + ${output.jelinskiMorandaOutput.N}"></p>
+            <p th:text="'fi: ' + ${output.jelinskiMorandaOutput.fi}"></p>
+            <p th:text="'ET: ' + ${output.jelinskiMorandaOutput.ET}"></p>
+        </div>
+        <div th:if="${output.schickWolvertonOutput} != null">
+            <h1>Model Schicka-Wolvertona</h1>
+            <p th:text="'N: ' + ${output.schickWolvertonOutput.N}"></p>
+            <p th:text="'fi: ' + ${output.schickWolvertonOutput.fi}"></p>
+            <p th:text="'ET: ' + ${output.schickWolvertonOutput.ET}"></p>
+        </div>
+    </div>
+
+    <div>
+        <form method="POST" action="#" th:action="@{/}" th:object="${input}" enctype="multipart/form-data">
+            <input type="number" step="any" th:field="*{epsilon}"/>
+            <input type="file" th:field="*{file}"/>
+            <input type="submit" value="OK"/>
+        </form>
+    </div>
+</body>
+</html>
