@@ -15,6 +15,7 @@ public class ModelService {
 
         return Output.builder()
                 .jelinskiMorandaOutput(jelinskiMorandaModel.solution())
+                .schickWolvertonOutput(jelinskiMorandaModel.solution())
                 .build();
     }
 }

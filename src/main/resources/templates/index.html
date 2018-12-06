@@ -3,29 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Niezawodność oprogramowania</title>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="http://cdn.jsdelivr.net/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div th:if="${output} != null">
-        <div th:if="${output.jelinskiMorandaOutput} != null">
-            <h1>Model Jelińskiego-Morandy</h1>
-            <p th:text="'N: ' + ${output.jelinskiMorandaOutput.N}"></p>
-            <p th:text="'fi: ' + ${output.jelinskiMorandaOutput.fi}"></p>
-            <p th:text="'ET: ' + ${output.jelinskiMorandaOutput.ET}"></p>
+    <section>
+        <div class="container">
+            <h2>Wyznacz wartości estymatorów parametrów</h2>
+            <form method="POST" action="#" th:action="@{/}" th:object="${input}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="epsilon">Dokładność obliczeń: </label>
+                    <input id="epsilon" type="number" step="any" th:field="*{epsilon}" required/>
+                </div>
+                <div class="custom-file">
+                    <input type="file" th:field="*{file}" required/>
+                </div>
+                <input type="submit" class="btn btn-dark" value="Wykonaj obliczenia"/>
+            </form>
         </div>
-        <div th:if="${output.schickWolvertonOutput} != null">
-            <h1>Model Schicka-Wolvertona</h1>
-            <p th:text="'N: ' + ${output.schickWolvertonOutput.N}"></p>
-            <p th:text="'fi: ' + ${output.schickWolvertonOutput.fi}"></p>
-            <p th:text="'ET: ' + ${output.schickWolvertonOutput.ET}"></p>
+    </section>
+    <hr class="my-3">
+    <section th:if="${output} != null">
+        <div class="container">
+            <div class="row">
+                <div th:if="${output.jelinskiMorandaOutput} != null" class="col-md-6">
+                    <h3>Model Jelińskiego-Morandy</h3>
+                    <hr class="my-1">
+                    <p th:text="'N: ' + ${output.jelinskiMorandaOutput.N}"></p>
+                    <p th:text="'fi: ' + ${output.jelinskiMorandaOutput.fi}"></p>
+                    <p th:text="'ET: ' + ${output.jelinskiMorandaOutput.ET}"></p>
+                </div>
+                <div th:if="${output.schickWolvertonOutput} != null" class="col-md-6">
+                    <h3>Model Schicka-Wolvertona</h3>
+                    <hr class="my-1">
+                    <p th:text="'N: ' + ${output.schickWolvertonOutput.N}"></p>
+                    <p th:text="'fi: ' + ${output.schickWolvertonOutput.fi}"></p>
+                    <p th:text="'ET: ' + ${output.schickWolvertonOutput.ET}"></p>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div>
-        <form method="POST" action="#" th:action="@{/}" th:object="${input}" enctype="multipart/form-data">
-            <input type="number" step="any" th:field="*{epsilon}"/>
-            <input type="file" th:field="*{file}"/>
-            <input type="submit" value="OK"/>
-        </form>
-    </div>
+    </section>
 </body>
 </html>
