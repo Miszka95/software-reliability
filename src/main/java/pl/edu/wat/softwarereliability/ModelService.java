@@ -11,11 +11,12 @@ public class ModelService {
 
     Output calculateModels(Input input) {
         ModelInput modelInput = inputMapper.map(input);
-        JelinskiMorandaModel jelinskiMorandaModel = new JelinskiMorandaModel(modelInput);
+        ReliabilityModel jelinskiMorandaModel = new JelinskiMorandaModel(modelInput);
+        ReliabilityModel schickWolvertonModel = new SchickWolvertonModel(modelInput);
 
         return Output.builder()
                 .jelinskiMorandaOutput(jelinskiMorandaModel.solution())
-                .schickWolvertonOutput(jelinskiMorandaModel.solution())
+                .schickWolvertonOutput(schickWolvertonModel.solution())
                 .build();
     }
 }

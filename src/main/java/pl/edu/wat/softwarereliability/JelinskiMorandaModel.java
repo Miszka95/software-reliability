@@ -1,37 +1,16 @@
 package pl.edu.wat.softwarereliability;
 
-import java.util.List;
-
-class JelinskiMorandaModel {
-
-    private final List<Integer> times;
-    private final int SIZE;
-    private final double epsilon;
-
-    private int N;
-    private double fi;
-    private double ET;
+class JelinskiMorandaModel extends ReliabilityModel {
 
     JelinskiMorandaModel(ModelInput modelInput) {
-        epsilon = modelInput.getEpsilon();
-        times = modelInput.getTimes();
-        SIZE = times.size();
-
-        calculate();
+        super(modelInput);
     }
 
-    ModelOutput solution() {
-        return ModelOutput.builder()
-                .N(N)
-                .fi(fi)
-                .ET(ET)
-                .build();
-    }
-
-    private void calculate() {
-        N = calculateN();
-        fi = calculateFi();
-        ET = 1d / (fi * (N - SIZE));
+    @Override
+    protected void calculate() {
+        this.N = calculateN();
+        this.fi = calculateFi();
+        this.ET = 1d / (fi * (N - SIZE));
     }
 
     private int calculateN() {
