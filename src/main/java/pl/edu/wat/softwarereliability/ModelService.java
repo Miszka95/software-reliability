@@ -11,8 +11,8 @@ public class ModelService {
 
     Output calculateModels(Input input) {
         ModelInput modelInput = inputMapper.map(input);
-        ReliabilityModel jelinskiMorandaModel = new JelinskiMorandaModel(modelInput);
-        ReliabilityModel schickWolvertonModel = new SchickWolvertonModel(modelInput);
+        ReliabilityModel jelinskiMorandaModel = JelinskiMorandaModel.create(modelInput);
+        ReliabilityModel schickWolvertonModel = SchickWolvertonModel.create(modelInput);
 
         return Output.builder()
                 .jelinskiMorandaOutput(jelinskiMorandaModel.solution())

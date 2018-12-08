@@ -4,14 +4,20 @@ import java.util.stream.IntStream;
 
 class SchickWolvertonModel extends ReliabilityModel {
 
-    SchickWolvertonModel(ModelInput modelInput) {
-        super(modelInput);
+    static ReliabilityModel create(ModelInput modelInput) {
+        SchickWolvertonModel schickWolvertonModel = new SchickWolvertonModel(modelInput);
+        schickWolvertonModel.calculate();
+        return schickWolvertonModel;
     }
 
     @Override
     protected void calculate() {
         calculateParameters();
         this.ET = Math.sqrt(Math.PI / (2 * fi * (N - SIZE)));
+    }
+
+    private SchickWolvertonModel(ModelInput modelInput) {
+        super(modelInput);
     }
 
     private void calculateParameters() {

@@ -2,8 +2,10 @@ package pl.edu.wat.softwarereliability;
 
 class JelinskiMorandaModel extends ReliabilityModel {
 
-    JelinskiMorandaModel(ModelInput modelInput) {
-        super(modelInput);
+    static ReliabilityModel create(ModelInput modelInput) {
+        JelinskiMorandaModel jelinskiMorandaModel = new JelinskiMorandaModel(modelInput);
+        jelinskiMorandaModel.calculate();
+        return jelinskiMorandaModel;
     }
 
     @Override
@@ -11,6 +13,10 @@ class JelinskiMorandaModel extends ReliabilityModel {
         this.N = calculateN();
         this.fi = calculateFi();
         this.ET = 1d / (fi * (N - SIZE));
+    }
+
+    private JelinskiMorandaModel(ModelInput modelInput) {
+        super(modelInput);
     }
 
     private int calculateN() {
