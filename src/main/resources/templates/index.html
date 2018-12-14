@@ -43,5 +43,13 @@
             </div>
         </div>
     </section>
+    <section th:if="${error} != null">
+        <div class="container">
+            <div>
+                <h3 th:text="${error}"></h3>
+                <p>Spróbuj ponownie :-)</p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

@@ -32,7 +32,7 @@ class SchickWolvertonModel extends ReliabilityModel {
         } while (diff > epsilon);
 
         this.N = N;
-        this.fi = (calculateFirst(N, T) + calculateSecond(N, T)) / 2;
+        this.fi = calculateFirst(N, T);
     }
 
     private double calculateFirst(int N, double T) {

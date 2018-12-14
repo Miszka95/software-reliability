@@ -13,6 +13,8 @@ import java.util.List;
 @Component
 public class InputMapper {
 
+    private static final String ERROR_MESSAGE = "Podane błędne dane wejściowe";
+
     ModelInput map(Input input) {
         return ModelInput.builder()
                 .times(getTimes(input.getFile()))
@@ -26,7 +28,7 @@ public class InputMapper {
             String line;
             while ((line = reader.readLine()) != null) {
                 Arrays.stream(line.split("\\s+"))
-                        .forEach(token -> times.add(Integer.parseInt(token)));
+                        .forEach(token -> times.add(parseToken(token)));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,5 +36,11 @@ public class InputMapper {
         return times;
     }
 
-
+    private int parseToken(String token) {
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException exception) {
+            throw new InputDataException(ERROR_MESSAGE);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package pl.edu.wat.softwarereliability;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class ModelController {
 
     @GetMapping
     public ModelAndView mainPage() {
-        ModelAndView modelAndView = new ModelAndView(PAGE);
+        ModelAndView modelAndView = createView();
         modelAndView.addObject("input", new Input());
         return modelAndView;
     }
@@ -25,8 +26,20 @@ public class ModelController {
     @PostMapping
     public ModelAndView handleRequest(@ModelAttribute Input input) {
         Output output = modelService.calculateModels(input);
-        ModelAndView modelAndView = new ModelAndView(PAGE);
+        ModelAndView modelAndView = createView();
         modelAndView.addObject("output", output);
         return modelAndView;
+    }
+
+    @ExceptionHandler(InputDataException.class)
+    public ModelAndView handleException(Exception exception) {
+        ModelAndView modelAndView = createView();
+        modelAndView.addObject("error", exception.getMessage());
+        modelAndView.addObject("input", new Input());
+        return modelAndView;
+    }
+
+    private ModelAndView createView() {
+        return new ModelAndView(PAGE);
     }
 }
