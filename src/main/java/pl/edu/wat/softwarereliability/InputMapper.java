@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class InputMapper {
 
-    private static final String ERROR_MESSAGE = "Podane błędne dane wejściowe";
+    private static final String ERROR_MESSAGE = "Podano błędne dane wejściowe";
 
     ModelInput map(Input input) {
         return ModelInput.builder()
